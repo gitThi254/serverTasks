@@ -7,8 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon api",
-    "start": "node api"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
