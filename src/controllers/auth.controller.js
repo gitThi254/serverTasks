@@ -4,12 +4,6 @@ const createAccessToken = require("../libs/jwt");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
-const checkLogin = (req) => {
-  const { token } = req.cookies;
-  if (token) return false;
-  return false;
-};
-
 exports.signup = asyncHandlerError(async (req, res, next) => {
   const newUser = await User.create(req.body);
   newUser.save();
@@ -17,8 +11,6 @@ exports.signup = asyncHandlerError(async (req, res, next) => {
 });
 
 exports.login = asyncHandlerError(async (req, res, next) => {
-  if (!checkLogin(req))
-    return next(new CustomError("you are already logged in", 400));
   const userLogin = await User.findOne({ email: req.body.email });
   console.log(await userLogin.comparePW(req.body.password));
   if (!userLogin || !(await userLogin.comparePW(req.body.password))) {
